@@ -4,7 +4,6 @@ module Tools
   class Luhn
     def initialize(str)
       @str = str
-      @array = [1..9]
     end
 
     def valid?
