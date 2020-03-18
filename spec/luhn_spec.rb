@@ -21,7 +21,7 @@ RSpec.describe Tools::Luhn do
 
   it 'becomes invalid if digits reversed' do
     luhn = Tools::Luhn.new('59')
-    expect(luhn.valid?).to be false
+    expect(luhn.valid?).to be true
   end
 
   it 'allows a valid canadian sin' do
