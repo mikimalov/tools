@@ -50,7 +50,7 @@ module Tools
     end
 
     def punctuation_rules?
-     @str.length <= 1 || @str.chars.any? { |char| ('a'..'z').include? char.downcase } || !@str.scan(/[!$&#-]/).empty?  ||  @str.include?(':') || @str.length == 2 && @str[0] == ' ' && @str[1] == '0'
+     @str.length <= 1 || @str.chars.any? { |char| ('a'..'z').include? char.downcase } || !@str.scan(/[!$&#-]/).empty? || @str.include?(':') || @str.length == 2 && @str[0] == ' ' && @str[1] == '0'
     end
   end
 
@@ -91,23 +91,90 @@ module Tools
 
     def initialize(number)
       @number = number
+      @string = ''
     end
 
-    def raindrop_speak
+    def speak
       do_math
     end
 
   private
 
     def do_math
-      return 'PlingPlangPlong' if @number % 3 == 0 && @number % 5 == 0 && @number % 7 == 0
-      return 'PlangPlong' if @number % 5 == 0 && @number % 7 == 0
-      return 'PlingPlong' if @number % 3 == 0 && @number % 7 == 0
-      return 'PlingPlang' if @number % 3 == 0 && @number % 5 == 0
-      return 'Pling' if @number % 3 == 0
-      return 'Plang' if @number % 5 == 0
-      return 'Plong' if @number % 7 == 0
-      @number.to_s
+      @string += 'Pling' if @number % 3 == 0
+      @string += 'Plang' if @number % 5 == 0
+      @string += 'Plong' if @number % 7 == 0
+      @string.empty? ? @number.to_s : @string
+    end
+  end
+
+  class Squares
+    def initialize(number)
+      @number = number
+    end
+
+    def square_of_sum
+      (1..@number).sum ** 2
+    end
+
+    def sum_of_squares
+      ((1..@number).map { |num| num**2 }).sum
+    end
+
+    def difference
+      square_of_sum - sum_of_squares
+    end
+  end
+
+  class Rnatranscription
+    RNA = { 'G' => 'C',
+      'C' => 'G',
+      'T' => 'A',
+      'A' => 'U'
+    }
+    def initialize(sequence)
+      @seq = sequence
+    end
+
+    def complement_nucleotide
+      @seq.chars.map { |nucl| RNA.fetch(nucl, '') }.join
+    end
+  end
+
+  class Allergies
+    LIMIT = 256
+    ALLERGENS = {
+      1 => 'eggs',
+      2 => 'peanuts',
+      4 => 'shellfish',
+      8 => 'strawberries',
+      16 => 'tomatoes',
+      32 => 'chocolate',
+      64 => 'pollen',
+      128 => 'cats'
+    }
+    def initialize(score)
+      @score = score
+      @score -= LIMIT while @score >= LIMIT
+    end
+
+    def allergic_to?(allergen)
+      allergens.include?(allergen)
+    end
+
+    def allergens
+      score_allergens.map { |allergen| ALLERGENS[allergen] }
+    end
+
+    private
+
+    def allergen_keys
+      ALLERGENS.keys.select { | key | key <= @score }.sort.reverse
+    end
+
+    def score_allergens
+      s = @score
+      allergen_keys.select { |key| s >= key && s -= key }
     end
   end
 end
