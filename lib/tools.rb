@@ -177,4 +177,41 @@ module Tools
       allergen_keys.select { |key| s >= key && s -= key }
     end
   end
+
+  class Resistors
+    RESISTOR = {
+     'black' => '0',
+     'brown' => '1',
+     'red' => '2',
+     'orange' => '3',
+     'yellow' => '4',
+     'green' => '5',
+     'blue' => '6',
+     'violet' => '7',
+     'gray' => '8',
+     'white' => '9',
+     'gold' => '-' ,
+     'silver' => '-'
+    }
+
+    def initialize(color1, color2, color3)
+      @color1 = color1
+      @color2 = color2
+      @color3 = color3
+    end
+
+    def resistor_values
+     values.to_i
+    end
+
+    private
+
+    def color_values
+      (RESISTOR[@color1] + RESISTOR[@color2]).delete('0').delete('-')
+    end
+
+    def values
+      color_values.length < 2 ? color_values + RESISTOR[@color3] : color_values
+    end
+  end
 end
