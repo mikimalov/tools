@@ -9,7 +9,7 @@ module Tools
       numbers
     end
 
-  # private
+  private
 
     def numbers
       @arr.size <= 2 ? @arr.sum : array_math
