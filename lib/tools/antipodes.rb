@@ -1,5 +1,4 @@
 module Tools
-  # attr_reader :odd, :one_number
   class Antipodes
     def initialize(array)
       @arr = array
