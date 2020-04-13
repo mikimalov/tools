@@ -5,14 +5,10 @@ module Tools
     end
 
     def numbers?
-      numbers
+      @arr.size <= 2 ? @arr.sum : array_math
     end
 
   private
-
-    def numbers
-      @arr.size <= 2 ? @arr.sum : array_math
-    end
 
     def array_split
       @arr.length.odd? ? @arr.slice!(@arr.size/2) : @arr

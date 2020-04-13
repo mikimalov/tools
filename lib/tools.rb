@@ -8,8 +8,8 @@ require "tools/resistors"
 require "tools/fer"
 require "tools/squares"
 require "tools/antipodes"
-
-
+require "tools/chocolate"
+require "tools/odd_number"
 
 
 
