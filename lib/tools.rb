@@ -9,9 +9,9 @@ require "tools/fer"
 require "tools/squares"
 require "tools/antipodes"
 require "tools/chocolate"
-require "tools/odd_number"
-
-
+require "tools/oddnumber"
+require "tools/time"
+require "tools/pokemon"
 
 
 

@@ -1,5 +1,5 @@
 module Tools
-  class Odd_number
+  class Oddnumber
     def initialize(array)
       @array = array
     end
