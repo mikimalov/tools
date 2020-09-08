@@ -12,6 +12,7 @@ require "tools/chocolate"
 require "tools/oddnumber"
 require "tools/time"
 require "tools/pokemon"
+require "tools/pokemondamage"
 
 
 
